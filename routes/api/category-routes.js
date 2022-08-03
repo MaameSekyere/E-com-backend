@@ -16,12 +16,12 @@ router.get("/:id", (req, res) => {
   Category.findByPk(req.params.id, {
     include: [{ model: Product }],
   })
-    .then((dbcategoryData) => {
-      if (!dbcategoryData) {
+    .then((dbCategoryData) => {
+      if (!dbCategoryData) {
         res.status(404).json({ message: "No categories found" });
         return;
       }
-      res.json(dbcategoryData);
+      res.json(dbCategoryData);
     })
     .catch((err) => {
       console.log(err);
@@ -43,16 +43,13 @@ router.post("/", (req, res) => {
 
 //update a category
 router.put("/", (req, res) => {
-  Category.update(
-    { category_name: req.body.category_name },
-    { where: { id: req.params.id } }
-  )
-    .then((dbcategoryData) => {
-      if (!dbcategoryData) {
-        res.status(404).json({ message: "No categories found" });
+  Category.update(req.body, { where: { id: req.params.id } })
+    .then((dbCategoryData) => {
+      if (!dbCategoryData) {
+        res.status(404).json({ message: "No category found" });
         return;
       }
-      res.json(dbcategoryData);
+      res.json(dbCategoryData);
     })
     .catch((err) => {
       console.log(err);
@@ -62,7 +59,7 @@ router.put("/", (req, res) => {
 
 //delete a category
 router.delete("/:id", (req, res) => {
-  Comment.destroy({
+  Category.destroy({
     where: {
       id: req.params.id,
     },
