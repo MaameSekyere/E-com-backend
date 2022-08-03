@@ -42,7 +42,7 @@ router.post("/", (req, res) => {
 });
 
 //update a category
-router.put("/", (req, res) => {
+router.put("/:id", (req, res) => {
   Category.update(req.body, { where: { id: req.params.id } })
     .then((dbCategoryData) => {
       if (!dbCategoryData) {

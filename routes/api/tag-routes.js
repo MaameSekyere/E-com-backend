@@ -38,7 +38,7 @@ router.post("/", (req, res) => {
     });
 });
 
-router.put("/", (req, res) => {
+router.put("/:id", (req, res) => {
   Tag.update({ tag_name: req.body.tag_name }, { where: { id: req.params.id } })
     .then((dbTagData) => {
       if (!dbTagData) {

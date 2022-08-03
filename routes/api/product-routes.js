@@ -52,7 +52,7 @@ router.post("/", (req, res) => {
 });
 
 //update a product
-router.put("/", (req, res) => {
+router.put("/:id", (req, res) => {
   Product.update(req.body, { where: { id: req.params.id } })
     .then((product) => {
       return ProductTag.findAll({ where: { product_id: req.params.id } });
